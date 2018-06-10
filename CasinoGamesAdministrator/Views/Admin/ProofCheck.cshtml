@@ -1,0 +1,50 @@
+﻿@model IEnumerable<CasinoGamesAdministrator.Classes.User>
+
+@{
+    ViewBag.Title = "ProofCheck";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ProofCheck</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.Name)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.UserName)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Verified)
+		</th>
+	</tr>
+
+@foreach (var item in Model) {
+	if (item.Verified == false) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+		<td>
+			@Html.DisplayFor(modelItem => item.UserName)
+		</td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Verified)
+        </td>      
+        <td>
+            <form action="VerifyUser" method="post"><input type="submit" value="Edit" name="@Model"/></form>
+        </td>
+    </tr>
+	}
+}
+
+</table>
+
+
+<script>
+
+</script>

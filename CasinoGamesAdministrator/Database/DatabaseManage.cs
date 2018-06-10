@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -56,6 +58,12 @@ namespace CasinoGamesAdministrator.Database
 					string email = reader.GetString(8);
 					string phonenumber = reader.GetString(10);
 					string username = reader.GetString(11);
+					string role = reader.GetString(12);
+
+					byte[] imageBytes = Convert.FromBase64String(proof);
+					MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
+					ms.Write(imageBytes, 0, imageBytes.Length);
+					Image image = Image.FromStream(ms, true);
 
 					User user = new User()
 					{
@@ -69,6 +77,7 @@ namespace CasinoGamesAdministrator.Database
 						Email = email,
 						PhoneNumber = phonenumber,
 						UserName = username,
+						Role = role
 					};
 					
 					users.Add(user);
